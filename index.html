@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quem é essa Personagem? - Mundo da Moranguinho</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff0f5; 
+            background-image: radial-gradient(#ffb6c1 15%, transparent 16%), radial-gradient(#ffb6c1 15%, transparent 16%);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: #4a2c2a;
+        }
+        h1 {
+            color: #ff3b6f; 
+            text-shadow: 2px 2px 0px #ffffff, 4px 4px 0px #ffb6c1;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .busca-container {
+            margin-bottom: 25px;
+        }
+        input, button {
+            padding: 12px 18px;
+            font-size: 16px;
+            border-radius: 25px; 
+            border: 2px solid #ff9ebb;
+            outline: none;
+            font-family: Arial, sans-serif;
+        }
+        input {
+            background-color: #ffffff;
+            color: #4a2c2a;
+            width: 250px;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            border-color: #ff3b6f;
+        }
+        button {
+            background-color: #ff3b6f; 
+            color: white;
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+            box-shadow: 0 4px 0px #c71545;
+            transition: transform 0.1s, box-shadow 0.1s;
+            margin-left: 5px;
+        }
+        button:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0px #c71545;
+        }
+        .card-personagem {
+            background: #ffffff;
+            border-radius: 20px;
+            border: 4px solid #8fce00; 
+            box-shadow: 0 8px 16px rgba(255, 105, 180, 0.2);
+            padding: 25px;
+            text-align: center;
+            width: 240px;
+            display: none; 
+            position: relative;
+        }
+        .card-personagem::before {
+            content: "✿";
+            color: #8fce00;
+            font-size: 24px;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffffff;
+            padding: 0 10px;
+        }
+        .card-personagem img {
+            width: 140px;
+            height: 140px;
+            object-fit: contain;
+            border-bottom: 2px dashed #ffb6c1;
+            padding-bottom: 10px;
+        }
+        .nome-personagem {
+            text-transform: capitalize;
+            font-size: 24px;
+            color: #ff3b6f;
+            margin: 15px 0 5px 0;
+        }
+        .error-msg {
+            color: #d11a2a;
+            font-weight: bold;
+            background: #ffe5e7;
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 1px solid #ffb3b8;
+            display: none;
+            margin-bottom: 15px;
+        }
+        #poke-hit {
+            color: #ff3b6f;
+            font-weight: bold;
+        }
+        .silhouette, .silhueta {
+            filter: brightness(0);
+        }
+        #personagens-vistas {
+            width: 60vw;
+            margin-top: 40px;
+        }
+        #tabela-personagens {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 2px solid #ff9ebb;
+            border-radius: 15px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        #tabela-personagens th, #tabela-personagens td {
+            padding: 12px;
+            text-align: center;
+        }
+        #tabela-personagens th {
+            background-color: #ffb6c1; 
+            color: #ffffff;
+            font-size: 16px;
+            border-bottom: 2px solid #ff9ebb;
+        }
+        #tabela-personagens td {
+            border-bottom: 1px solid #fff0f5;
+            color: #5c3a38;
+        }
+        #tabela-personagens tr:last-child td {
+            border-bottom: none;
+        }
+        #tabela-personagens button {
+            padding: 5px 10px;
+            font-size: 12px;
+            background-color: #8fce00;
+            box-shadow: 0 2px 0px #639000;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        #tabela-personagens button:active {
+            transform: translateY(2px);
+            box-shadow: 0 0px 0px #639000;
+        }
+        h3 {
+            color: #ff3b6f;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Quem é essa Personagem?</h1>
+    
+    <div class="busca-container">
+        <form method="GET">
+            <input type="text" name="personagem_nome" id="pokemon-input" placeholder="Digite o nome da personagem">
+            <button id="btn-buscar" type="submit">Revelar</button>
+        </form>
+    </div>
+
+    <p id="erro" class="error-msg">Personagem não encontrada. Tente novamente!</p>
+
+    <div id="card" class="card-personagem">
+        <img id="poke-img" src="" alt="Imagem da Personagem" class="silhueta">
+        <h2 id="poke-name" class="nome-personagem"></h2>
+        <p><strong>Fruta / Estilo:</strong> <span id="poke-type"></span></p>
+        <p> <span id="poke-hit"></span></p>
+    </div>
+
+    <div id="personagens-vistas">
+        <h3>Personagens Vistas</h3>
+        <table id="tabela-personagens">
+            <thead>
+                <tr>
+                    <th>Nome Original</th>
+                    <th>Nome Tentado</th>
+                    <th>Apagar</th>
+                </tr>
+            </thead>
+            <tbody id="pokemons-tbody"></tbody>
+        </table>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
