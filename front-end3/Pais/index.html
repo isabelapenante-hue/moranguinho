@@ -1,0 +1,188 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Que país é esse?</title>
+
+    <style>
+        body {
+
+            font-family: Arial;
+
+            background: #f4f4f9;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            padding: 20px;
+
+        }
+
+        .busca-container {
+
+            margin-bottom: 20px;
+
+        }
+
+        input,
+        button {
+
+            padding: 10px;
+
+            font-size: 16px;
+
+            border-radius: 5px;
+
+        }
+
+        button {
+
+            background: #2196f3;
+
+            color: white;
+
+            border: none;
+
+            cursor: pointer;
+
+        }
+
+        .country-card {
+
+            background: white;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            width: 260px;
+
+            text-align: center;
+
+            display: none;
+
+        }
+
+        .country-card img {
+
+            width: 220px;
+
+            height: 140px;
+
+            object-fit: cover;
+
+        }
+
+        table {
+
+            margin-top: 50px;
+
+            width: 60vw;
+
+            border-collapse: collapse;
+
+        }
+
+        th,
+        td {
+
+            border: 1px solid #ccc;
+
+            padding: 10px;
+
+            text-align: center;
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Que país é esse?</h1>
+
+    <div class="busca-container">
+
+        <form>
+
+            <input type="text" name="pais_nome" placeholder="Digite o país">
+
+            <button>
+
+                Revelar
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <div id="card" class="country-card">
+
+        <img id="country-img">
+
+        <h2 id="country-name">
+
+        </h2>
+
+        <p>
+
+            <strong>Continente:</strong>
+
+            <span id="country-region">
+
+            </span>
+
+        </p>
+
+        <p>
+
+            <span id="country-hit">
+
+            </span>
+
+        </p>
+
+    </div>
+
+    <h3>Países vistos</h3>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>País</th>
+
+                <th>Tentativa</th>
+
+                <th>Apagar</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="tbody">
+
+        </tbody>
+
+    </table>
+
+    <script type="module" src="script.js">
+    </script>
+
+</body>
+
+</html>
